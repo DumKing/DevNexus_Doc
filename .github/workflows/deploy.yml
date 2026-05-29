@@ -1,0 +1,79 @@
+name: Deploy Website
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'src/**'
+      - 'scripts/**'
+      - 'package.json'
+      - '.github/workflows/deploy.yml'
+  workflow_dispatch:
+    inputs:
+      devnexus_ref:
+        description: 'DevNexus ref, branch, or tag to build from'
+        required: false
+        default: 'main'
+  repository_dispatch:
+    types: [devnexus-release]
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout website
+        uses: actions/checkout@v4
+        with:
+          path: site
+
+      - name: Resolve DevNexus ref
+        id: ref
+        shell: bash
+        run: |
+          ref="main"
+          if [ "${{ github.event_name }}" = "repository_dispatch" ] && [ -n "${{ github.event.client_payload.tag }}" ]; then
+            ref="${{ github.event.client_payload.tag }}"
+          elif [ "${{ github.event_name }}" = "workflow_dispatch" ] && [ -n "${{ github.event.inputs.devnexus_ref }}" ]; then
+            ref="${{ github.event.inputs.devnexus_ref }}"
+          fi
+          echo "ref=$ref" >> "$GITHUB_OUTPUT"
+
+      - name: Checkout DevNexus source
+        uses: actions/checkout@v4
+        with:
+          repository: DumKing/DevNexus
+          ref: ${{ steps.ref.outputs.ref }}
+          path: source
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Configure Pages
+        uses: actions/configure-pages@v5
+
+      - name: Build website docs
+        working-directory: site
+        run: node scripts/build-docs.cjs ../source
+
+      - name: Upload website artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: site/dist
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

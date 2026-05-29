@@ -1,0 +1,72 @@
+[
+  {
+    "id": "redis-manager",
+    "name": "Redis Manager",
+    "category": "Database",
+    "zh": "Redis Key 树浏览、DB 切换、Key 详情编辑、Server 监控和命令控制台。",
+    "en": "Redis key-tree browsing, DB switching, key detail editing, server insight, and command console."
+  },
+  {
+    "id": "ssh-client",
+    "name": "SSH Client",
+    "category": "Terminal",
+    "zh": "多标签 SSH 终端、密钥认证、快捷命令、跳板机连接和端口转发。",
+    "en": "Multi-tab SSH terminal, key authentication, quick commands, jump-host access, and port forwarding."
+  },
+  {
+    "id": "s3-browser",
+    "name": "S3 Browser",
+    "category": "Storage",
+    "zh": "S3/OSS Bucket 与 Object 浏览，支持手动 Bucket、上传下载、预览和预签名 URL。",
+    "en": "S3/OSS bucket and object browsing with manual buckets, upload/download, preview, and presigned URLs."
+  },
+  {
+    "id": "mongodb-client",
+    "name": "MongoDB Client",
+    "category": "Database",
+    "zh": "MongoDB 连接管理、数据库/集合浏览、文档查询、索引和基础 CRUD。",
+    "en": "MongoDB connections, database and collection browsing, document queries, indexes, and basic CRUD."
+  },
+  {
+    "id": "mysql-client",
+    "name": "MySQL Client",
+    "category": "Database",
+    "zh": "MySQL 连接、库表结构浏览、SQL 查询、数据编辑和查询历史。",
+    "en": "MySQL connections, schema browsing, SQL queries, data editing, and query history."
+  },
+  {
+    "id": "network-tools",
+    "name": "Network Tools",
+    "category": "Diagnostics",
+    "zh": "Ping、TCP 端口、DNS 和 Traceroute 网络诊断，保留本地历史。",
+    "en": "Ping, TCP port, DNS, and traceroute diagnostics with local history."
+  },
+  {
+    "id": "api-debugger",
+    "name": "API Debugger",
+    "category": "HTTP",
+    "zh": "轻量 Postman-like API 调试，支持集合、环境变量、历史复跑和 cURL 导入。",
+    "en": "Lightweight Postman-like API debugging with collections, environments, history replay, and cURL import."
+  },
+  {
+    "id": "mq-client",
+    "name": "MQ Client",
+    "category": "Messaging",
+    "zh": "RabbitMQ/Kafka 连接管理、资源浏览、消息发送、临时消费和模板历史。",
+    "en": "RabbitMQ/Kafka connections, resource browsing, message publishing, temporary consuming, templates, and history."
+  },
+  {
+    "id": "lan-chat",
+    "name": "LAN Chat",
+    "category": "Collaboration",
+    "zh": "局域网公共聊天室、点对点私聊、文件传输、媒体预览和未读提醒。",
+    "en": "LAN public room, direct chat, file transfer, media preview, and unread notifications."
+  },
+  {
+    "id": "confluence-publisher",
+    "name": "Confluence Publisher",
+    "category": "Docs",
+    "zh": "Markdown 编辑、页面树选择、一键发布、发布历史和 Mermaid 转 draw.io 嵌入。",
+    "en": "Markdown editing, page-tree selection, one-click publishing, publish history, and Mermaid-to-draw.io embedding."
+  }
+]
