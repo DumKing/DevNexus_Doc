@@ -1,0 +1,14 @@
+{
+  "name": "devnexus-doc",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Standalone DevNexus documentation and product website.",
+  "scripts": {
+    "build": "node scripts/build-docs.cjs",
+    "build:source": "node scripts/build-docs.cjs",
+    "preview": "node scripts/dev-server.cjs dist 58710"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

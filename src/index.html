@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="DevNexus is a local-first desktop toolbox for Redis, SSH, S3, MQ, API debugging, Confluence publishing, LAN chat, and database workflows." />
+    <meta property="og:title" content="DevNexus - Local-first developer toolbox" />
+    <meta property="og:description" content="A plugin-based desktop toolbox for developer operations, connection management, debugging, publishing, and LAN collaboration." />
+    <meta property="og:type" content="website" />
+    <title>DevNexus - Local-first developer toolbox</title>
+    <link rel="icon" href="./assets/devnexus-mark.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="site-shell">
+      <header class="topbar">
+        <a class="brand" href="#hero" aria-label="DevNexus home">
+          <img src="./assets/devnexus-mark.svg" alt="" />
+          <span>DevNexus</span>
+        </a>
+        <nav class="nav" aria-label="Primary navigation">
+          <a href="#features" data-i18n="nav.features">功能</a>
+          <a href="#releases" data-i18n="nav.releases">版本</a>
+          <a href="#docs" data-i18n="nav.docs">文档</a>
+          <a href="#download" data-i18n="nav.download">下载</a>
+        </nav>
+        <div class="top-actions">
+          <a class="docs-center-link" href="./content/docs.html?section=guide&doc=readme" data-i18n="nav.docsCenter">文档中心</a>
+          <a class="github-link" href="https://github.com/DumKing/DevNexus" aria-label="Open DevNexus on GitHub">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path fill="currentColor" d="M12 2C6.48 2 2 6.59 2 12.25c0 4.53 2.87 8.37 6.84 9.73.5.1.68-.22.68-.49 0-.24-.01-1.05-.01-1.9-2.78.62-3.37-1.22-3.37-1.22-.45-1.19-1.11-1.5-1.11-1.5-.91-.64.07-.63.07-.63 1 .07 1.53 1.06 1.53 1.06.9 1.56 2.35 1.11 2.92.85.09-.67.35-1.11.63-1.37-2.22-.26-4.55-1.14-4.55-5.07 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.31.1-2.72 0 0 .84-.28 2.75 1.05A9.3 9.3 0 0 1 12 6.95c.85 0 1.71.12 2.51.34 1.91-1.33 2.75-1.05 2.75-1.05.55 1.41.2 2.46.1 2.72.64.72 1.03 1.63 1.03 2.75 0 3.94-2.34 4.8-4.57 5.06.36.32.68.94.68 1.9 0 1.37-.01 2.47-.01 2.82 0 .27.18.59.69.49A10.22 10.22 0 0 0 22 12.25C22 6.59 17.52 2 12 2Z"/>
+            </svg>
+          </a>
+          <div class="lang-menu" id="langMenu">
+            <button class="lang-toggle" id="langToggle" type="button" aria-haspopup="listbox" aria-expanded="false">
+              <span id="langLabel">中文</span>
+              <span class="lang-caret">⌄</span>
+            </button>
+            <div class="lang-options" id="langOptions" role="listbox" aria-label="Select language">
+              <button type="button" role="option" data-lang-option="zh">
+                <strong>中文</strong>
+              </button>
+              <button type="button" role="option" data-lang-option="en">
+                <strong>English</strong>
+              </button>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <main>
+        <section class="hero" id="hero">
+          <div class="hero-copy">
+            <p class="eyebrow" data-i18n="hero.eyebrow">DevNexus v0.10.0</p>
+            <h1 data-i18n="hero.title">本地优先的开发者工具箱。</h1>
+            <p class="hero-subtitle" data-i18n="hero.subtitle">把连接管理、调试、文档发布和局域网协作集中到一个桌面应用。</p>
+            <div class="hero-actions">
+              <a class="button primary" href="https://github.com/DumKing/DevNexus/releases/latest" data-i18n="hero.download">下载最新版</a>
+              <a class="button ghost" href="https://github.com/DumKing/DevNexus" data-i18n="hero.github">查看 GitHub</a>
+            </div>
+            <div class="signal-row" aria-label="Project facts">
+              <span><strong id="releaseCount">--</strong><em data-i18n="hero.signalVersions">个小版本</em></span>
+              <span><strong id="pluginCount">--</strong><em data-i18n="hero.signalPlugins">个工具模块</em></span>
+              <span><strong>Tauri 2</strong><em data-i18n="hero.signalStack">轻量桌面内核</em></span>
+            </div>
+          </div>
+          <div class="hero-panel" aria-label="DevNexus product preview">
+            <div class="window-frame">
+              <div class="window-dots"><span></span><span></span><span></span></div>
+              <div class="preview-layout">
+                <aside>
+                  <b>DevNexus</b>
+                  <span>Redis</span>
+                  <span>SSH</span>
+                  <span>S3</span>
+                  <span>MQ</span>
+                  <span>Confluence</span>
+                </aside>
+                <section>
+                  <div class="preview-header">
+                    <span data-i18n="preview.workspace">Workspace</span>
+                    <i>local encrypted profiles</i>
+                  </div>
+                  <div class="terminal-card">
+                    <code>$ publish docs/payment-flow.md</code>
+                    <code class="ok">✓ converted markdown to storage format</code>
+                    <code class="ok">✓ uploaded draw.io diagram attachment</code>
+                    <code class="ok">✓ updated Confluence page</code>
+                  </div>
+                  <div class="mini-grid">
+                    <div><strong>Redis</strong><small>Keys + Server</small></div>
+                    <div><strong>S3/OSS</strong><small>Manual buckets</small></div>
+                    <div><strong>MQ</strong><small>RabbitMQ + Kafka</small></div>
+                    <div><strong>LAN Chat</strong><small>P2P + files</small></div>
+                  </div>
+                </section>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="section" id="features">
+          <div class="section-heading">
+            <p class="eyebrow" data-i18n="features.eyebrow">Plugin Toolbox</p>
+            <h2 data-i18n="features.title">从数据库到文档发布，按插件扩展。</h2>
+            <p data-i18n="features.subtitle">每个工具保持独立状态和后端命令，敏感配置本地加密保存。</p>
+          </div>
+          <div class="feature-carousel" id="featureCarousel" aria-label="Plugin toolbox">
+            <button class="feature-nav feature-nav-prev" id="featurePrev" type="button" aria-label="Previous plugin page">‹</button>
+            <div class="feature-viewport">
+              <div class="feature-track" id="featureGrid"></div>
+            </div>
+            <button class="feature-nav feature-nav-next" id="featureNext" type="button" aria-label="Next plugin page">›</button>
+          </div>
+          <div class="feature-dots" id="featureDots" aria-label="Plugin pages"></div>
+        </section>
+
+        <section class="section split-section" id="releases">
+          <div>
+            <p class="eyebrow" data-i18n="releases.eyebrow">Release Timeline</p>
+            <h2 data-i18n="releases.title">版本发布与产品演进</h2>
+            <p data-i18n="releases.subtitle">每一次上线，都是一次全面升级。我们不断拓展功能边界、优化交互体验、适配各类运行环境，并严格完成各项验证工作。循着版本记录，一同见证 DevNexus 从单一工具，一步步搭建为成熟开发者工作台的蜕变之路。</p>
+          </div>
+          <div class="timeline-shell" aria-label="Release timeline">
+            <div class="timeline-meta" id="timelineMeta"></div>
+            <div class="timeline" id="timeline"></div>
+          </div>
+        </section>
+
+        <section class="section docs-section" id="docs">
+          <div class="docs-intro">
+            <p class="eyebrow" data-i18n="docs.eyebrow">Documentation</p>
+            <h2 data-i18n="docs.title">开发文档、发布说明和仓库知识库集中入口。</h2>
+            <p data-i18n="docs.subtitle">README 面向用户和贡献者，Release Notes 记录版本变化，Qoder Wiki 保存更细的架构和插件知识。</p>
+          </div>
+          <div class="docs-browser">
+            <div class="docs-tabs" role="tablist" aria-label="Documentation sections">
+              <a class="doc-tab active" href="./content/docs.html?section=guide&doc=readme" data-doc-tab="readme" data-i18n="docs.readme">快速开始</a>
+              <a class="doc-tab" href="./content/docs.html?section=guide&doc=releases" data-doc-tab="releases" data-i18n="docs.releaseNotes">版本发布</a>
+              <a class="doc-tab" href="./content/docs.html?section=wiki" data-doc-tab="wiki" data-i18n="docs.wiki">RepoWiki</a>
+            </div>
+            <article class="docs-panel" id="docsPanel"></article>
+          </div>
+        </section>
+
+        <section class="download" id="download">
+          <div>
+            <p class="eyebrow" data-i18n="download.eyebrow">Get DevNexus</p>
+            <h2 data-i18n="download.title">下载最新桌面版本，或者从源码构建。</h2>
+            <p data-i18n="download.subtitle">Release 页面提供 Windows、macOS、Linux 构建产物；源码构建仍按 README 的 Tauri 前置依赖执行。</p>
+          </div>
+          <div class="download-actions">
+            <a class="button primary" href="https://github.com/DumKing/DevNexus/releases/latest" data-i18n="download.latest">打开最新 Release</a>
+            <a class="button ghost" href="https://github.com/DumKing/DevNexus/blob/main/README.md" data-i18n="download.build">查看构建说明</a>
+          </div>
+        </section>
+      </main>
+
+      <footer>
+        <span>Copyright © 2026 DevNexus</span>
+        <span data-i18n="footer.text">Local-first developer toolbox, built with Tauri + React + Rust.</span>
+        <a href="./license.html" data-i18n="footer.license">License 声明</a>
+      </footer>
+    </div>
+    <script src="./assets/plugin-toolbox.js"></script>
+    <script src="./assets/release-timeline.js"></script>
+    <script src="./main.js"></script>
+  </body>
+</html>
+
