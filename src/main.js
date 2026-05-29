@@ -78,6 +78,7 @@ const dictionary = {
 };
 
 const plugins = Array.isArray(window.__DEVNEXUS_PLUGINS__) ? window.__DEVNEXUS_PLUGINS__ : [];
+const siteData = window.__DEVNEXUS_SITE__ && typeof window.__DEVNEXUS_SITE__ === "object" ? window.__DEVNEXUS_SITE__ : {};
 const releaseTimeline = Array.isArray(window.__DEVNEXUS_RELEASES__) ? window.__DEVNEXUS_RELEASES__ : [];
 const releaseTimelineLimit = 4;
 
@@ -125,7 +126,24 @@ function chunkItems(items, size) {
   return pages.length ? pages : [[]];
 }
 
-const docs = {
+function latestReleaseDoc(lang) {
+  const latest = siteData.latestRelease || {};
+  const version = latest.version || siteData.latestVersion || "v0.10.0";
+  const fallbackZh = releaseTimeline.find((item) => item.version === version)?.summaryZh || "当前版本重点跟随 DevNexus 最新发布说明自动更新。";
+  const fallbackEn = releaseTimeline.find((item) => item.version === version)?.summaryEn || "The current release follows the latest DevNexus release notes automatically.";
+  return {
+    eyebrow: "Release Notes",
+    title: lang === "zh" ? (latest.titleZh || `${version} 发布重点`) : (latest.titleEn || `${version} highlights`),
+    body: lang === "zh" ? (latest.bodyZh || fallbackZh) : (latest.bodyEn || fallbackEn),
+    bullets: lang === "zh" ? (latest.bulletsZh || []) : (latest.bulletsEn || []),
+    code: latest.code || `docs/releases/en/${version}.md\ndocs/releases/cn/${version}.md`,
+    href: latest.href || "./content/docs.html?section=guide&doc=releases",
+    link: lang === "zh" ? "站内查看全部发布说明" : "Open all release notes in this site"
+  };
+}
+
+function buildDocs(lang) {
+  return {
   zh: {
     readme: {
       eyebrow: "README",
@@ -140,19 +158,7 @@ const docs = {
       href: "./content/docs.html?section=guide&doc=readme",
       link: "站内查看完整 README"
     },
-    releases: {
-      eyebrow: "Release Notes",
-      title: "v0.10.0 发布重点",
-      body: "当前版本重点增加 Confluence Publisher，并补强 OSS/S3 手动 Bucket、发布历史和文档知识库。",
-      bullets: [
-        "Confluence 页面树选择、一键发布/更新、本地发布历史",
-        "Mermaid 发布为 draw.io XML 附件并通过 draw.io 宏嵌入",
-        "S3/OSS 支持手动 Bucket 列表，适配无 ListBuckets 权限账号"
-      ],
-      code: "docs/releases/en/v0.10.0.md\ndocs/releases/cn/v0.10.0.md\npackage.json: 0.10.0\nsrc-tauri/Cargo.toml: 0.10.0",
-      href: "./content/docs.html?section=guide&doc=releases",
-      link: "站内查看全部发布说明"
-    },
+    releases: latestReleaseDoc("zh"),
     wiki: {
       eyebrow: "Qoder Wiki",
       title: "仓库知识库",
@@ -181,19 +187,7 @@ const docs = {
       href: "./content/docs.html?section=guide&doc=readme",
       link: "Open full README in this site"
     },
-    releases: {
-      eyebrow: "Release Notes",
-      title: "v0.10.0 highlights",
-      body: "The current release adds Confluence Publisher and improves OSS/S3 manual buckets, publishing history, and repository documentation.",
-      bullets: [
-        "Confluence page-tree selection, one-click create/update, local publish history",
-        "Mermaid publishing as draw.io XML attachments embedded through draw.io macros",
-        "S3/OSS manual bucket lists for accounts without ListBuckets permission"
-      ],
-      code: "docs/releases/en/v0.10.0.md\ndocs/releases/cn/v0.10.0.md\npackage.json: 0.10.0\nsrc-tauri/Cargo.toml: 0.10.0",
-      href: "./content/docs.html?section=guide&doc=releases",
-      link: "Open all release notes in this site"
-    },
+    releases: latestReleaseDoc("en"),
     wiki: {
       eyebrow: "Qoder Wiki",
       title: "Repository knowledge base",
@@ -208,7 +202,10 @@ const docs = {
       link: "Open full knowledge base in this site"
     }
   }
-};
+  }[lang];
+}
+
+const docs = { zh: buildDocs("zh"), en: buildDocs("en") };
 
 function renderCards(lang) {
   releaseCount.textContent = String(releaseTimeline.length || "--");
@@ -285,6 +282,8 @@ function applyLanguage(lang) {
   currentLang = lang;
   localStorage.setItem("devnexus.website.lang", lang);
   html.lang = lang === "zh" ? "zh-CN" : "en";
+  dictionary.zh["hero.eyebrow"] = siteData.latestVersion ? `DevNexus ${siteData.latestVersion}` : dictionary.zh["hero.eyebrow"];
+  dictionary.en["hero.eyebrow"] = siteData.latestVersion ? `DevNexus ${siteData.latestVersion}` : dictionary.en["hero.eyebrow"];
   document.querySelectorAll("[data-i18n]").forEach((node) => {
     const key = node.getAttribute("data-i18n");
     node.textContent = dictionary[lang][key] || node.textContent;

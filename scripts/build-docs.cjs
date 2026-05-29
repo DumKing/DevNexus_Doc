@@ -180,6 +180,14 @@ function buildPluginAsset() {
   fs.writeFileSync(target, `window.__DEVNEXUS_PLUGINS__ = ${JSON.stringify(plugins, null, 2)};\n`, 'utf8');
   return plugins;
 }
+function buildSiteDataAsset() {
+  const dataFile = path.join(siteSource, 'data', 'site-metadata.json');
+  const siteData = fs.existsSync(dataFile) ? JSON.parse(fs.readFileSync(dataFile, 'utf8')) : {};
+  const target = path.join(website, 'assets', 'site-data.js');
+  ensureDir(path.dirname(target));
+  fs.writeFileSync(target, `window.__DEVNEXUS_SITE__ = ${JSON.stringify(siteData, null, 2)};\n`, 'utf8');
+  return siteData;
+}
 function buildReadmePages() {
   const readme = splitReadme();
   writeMarkdownString(readme.zh, path.join(outDir, 'readme.zh.html'), '快速开始', 'DevNexus README 中文版。', '快速开始', 'zh');
@@ -228,7 +236,10 @@ function buildReleaseIndex() {
   return releaseItems;
 }
 function buildReleaseTimelineAsset(releaseItems) {
-  const payload = releaseItems.map((item) => ({ version: item.version, title: item.displayTitle, date: item.date, hrefZh: item.hrefZh, hrefEn: item.hrefEn, summaryZh: item.summaryZh, summaryEn: item.summaryEn }));
+  const dataFile = path.join(siteSource, 'data', 'release-timeline.json');
+  const payload = fs.existsSync(dataFile)
+    ? JSON.parse(fs.readFileSync(dataFile, 'utf8'))
+    : releaseItems.map((item) => ({ version: item.version, title: item.displayTitle, date: item.date, hrefZh: item.hrefZh, hrefEn: item.hrefEn, summaryZh: item.summaryZh, summaryEn: item.summaryEn }));
   const target = path.join(website, 'assets', 'release-timeline.js');
   ensureDir(path.dirname(target));
   fs.writeFileSync(target, `window.__DEVNEXUS_RELEASES__ = ${JSON.stringify(payload, null, 2)};\n`, 'utf8');
@@ -420,10 +431,11 @@ cleanDir(website);
 copyRecursive(siteSource, website);
 ensureDir(outDir);
 const plugins = buildPluginAsset();
+const siteData = buildSiteDataAsset();
 buildReadmePages();
 const releaseItems = buildReleaseIndex();
 buildReleaseTimelineAsset(releaseItems);
 const wikiByLang = { zh: buildWikiIndexForLang('zh'), en: buildWikiIndexForLang('en') };
 buildDocsPortal(releaseItems, wikiByLang);
 writeDocsCss();
-console.log(`Built DevNexus docs from ${sourceRoot} into ${website}; releases=${releaseItems.length}; plugins=${plugins.length}; wiki.zh=${wikiByLang.zh.length}; wiki.en=${wikiByLang.en.length}`);
+console.log(`Built DevNexus docs from ${sourceRoot} into ${website}; releases=${releaseItems.length}; plugins=${plugins.length}; latest=${siteData.latestVersion || 'none'}; wiki.zh=${wikiByLang.zh.length}; wiki.en=${wikiByLang.en.length}`);

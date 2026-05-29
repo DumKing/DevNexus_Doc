@@ -4,8 +4,9 @@
   "private": true,
   "description": "Standalone DevNexus documentation and product website.",
   "scripts": {
+    "sync:source": "node scripts/sync-source-data.cjs",
     "build": "node scripts/build-docs.cjs",
-    "build:source": "node scripts/build-docs.cjs",
+    "build:source": "node scripts/sync-source-data.cjs && node scripts/build-docs.cjs",
     "preview": "node scripts/dev-server.cjs dist 58710"
   },
   "engines": {
