@@ -1,17 +1,17 @@
 {
   "latestVersion": "v0.10.0",
   "latestReleaseTitle": "DevNexus v0.10.0",
-  "latestReleaseDate": "2026-05-27",
+  "latestReleaseDate": "2026-05-29",
   "latestRelease": {
     "version": "v0.10.0",
     "titleZh": "v0.10.0 发布重点",
     "titleEn": "v0.10.0 highlights",
-    "bodyZh": "New Confluence Publisher plugin: edit local Markdown files in a built-in Monaco editor, render a live Confluence-style preview, and publish/update pages on Confluence Server / Data Center with one click.",
+    "bodyZh": "新增 Confluence Publisher 插件：在内置 Monaco 编辑器中编辑本地 Markdown 文件，实时渲染类 Confluence 预览，并一键发布/更新到 Confluence Server / Data Center 页面。",
     "bodyEn": "New Confluence Publisher plugin: edit local Markdown files in a built-in Monaco editor, render a live Confluence-style preview, and publish/update pages on Confluence Server / Data Center with one click.",
     "bulletsZh": [
-      "New Confluence Publisher plugin: edit local Markdown files in a built-in Monaco editor, render a live Confluence-style preview, and publish/update pages on Confluence Server / Data Center with one click.",
-      "Connection management with site URL, username, and password/token; credentials are encrypted with AES-256-GCM in local SQLite, consistent with other DevNexus plugins.",
-      "Markdown → Confluence Storage Format conversion via unified + remark-parse + remark-gfm, covering headings, bold/italic, inline code, fenced code blocks, links, images, tables, task lists, blockquotes, ordered/unordered lists, and horizontal rules."
+      "新增 Confluence Publisher 插件：在内置 Monaco 编辑器中编辑本地 Markdown 文件，实时渲染类 Confluence 预览，并一键发布/更新到 Confluence Server / Data Center 页面。",
+      "连接管理支持站点 URL、用户名、密码/Token；凭据与其他 DevNexus 插件保持一致，使用 AES-256-GCM 加密后存储在本地 SQLite。",
+      "Markdown → Confluence Storage Format 转换基于 unified、remark-parse、remark-gfm，覆盖标题、粗体/斜体、行内代码、围栏代码块、链接、图片、表格、任务列表、引用块、有序/无序列表和分割线。"
     ],
     "bulletsEn": [
       "New Confluence Publisher plugin: edit local Markdown files in a built-in Monaco editor, render a live Confluence-style preview, and publish/update pages on Confluence Server / Data Center with one click.",

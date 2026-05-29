@@ -4,11 +4,11 @@
     "title": "v0.10.0",
     "version": "v0.10.0",
     "displayTitle": "DevNexus v0.10.0",
-    "date": "2026-05-27",
+    "date": "2026-05-29",
     "group": "Release",
     "hrefZh": "releases/v0.10.0.zh.html",
     "hrefEn": "releases/v0.10.0.en.html",
-    "summaryZh": "New Confluence Publisher plugin: edit local Markdown files in a built-in Monaco editor, render a live Confluence-style preview, and publish/update pages on Confluence Server / Data Center with one click.",
+    "summaryZh": "新增 Confluence Publisher 插件：在内置 Monaco 编辑器中编辑本地 Markdown 文件，实时渲染类 Confluence 预览，并一键发布/更新到 Confluence Server / Data Center 页面。",
     "summaryEn": "New Confluence Publisher plugin: edit local Markdown files in a built-in Monaco editor, render a live Confluence-style preview, and publish/update pages on Confluence Server / Data Center with one click."
   },
   {
@@ -20,7 +20,7 @@
     "group": "Release",
     "hrefZh": "releases/v0.9.3.zh.html",
     "hrefEn": "releases/v0.9.3.en.html",
-    "summaryZh": "Publishes separate macOS DMG assets for Intel (x64) and Apple Silicon (arm64) in CI and tag-triggered releases.",
+    "summaryZh": "CI 和 tag 触发发布中分别产出 Intel (x64) 与 Apple Silicon (arm64) 两套 macOS DMG。",
     "summaryEn": "Publishes separate macOS DMG assets for Intel (x64) and Apple Silicon (arm64) in CI and tag-triggered releases."
   },
   {
@@ -32,7 +32,7 @@
     "group": "Release",
     "hrefZh": "releases/v0.9.2.zh.html",
     "hrefEn": "releases/v0.9.2.en.html",
-    "summaryZh": "Consolidates the LAN Chat v0.9.0 and v0.9.1 release line into a single v0.9.2 release note.",
+    "summaryZh": "将 LAN Chat v0.9.0 与 v0.9.1 发布线合并为一个 v0.9.2 发布说明。",
     "summaryEn": "Consolidates the LAN Chat v0.9.0 and v0.9.1 release line into a single v0.9.2 release note."
   },
   {
@@ -44,7 +44,7 @@
     "group": "Release",
     "hrefZh": "releases/v0.8.0.zh.html",
     "hrefEn": "releases/v0.8.0.en.html",
-    "summaryZh": "Added the unified MQ Client plugin for RabbitMQ and Kafka.",
+    "summaryZh": "新增统一 MQ Client 插件，支持 RabbitMQ 和 Kafka。",
     "summaryEn": "Added the unified MQ Client plugin for RabbitMQ and Kafka."
   },
   {
@@ -56,7 +56,7 @@
     "group": "Release",
     "hrefZh": "releases/v0.7.1.zh.html",
     "hrefEn": "releases/v0.7.1.en.html",
-    "summaryZh": "Improved the SSH terminal workspace based on issue #1 feedback.",
+    "summaryZh": "基于 issue #1 反馈优化 SSH terminal 工作区。",
     "summaryEn": "Improved the SSH terminal workspace based on issue #1 feedback."
   },
   {
@@ -68,7 +68,7 @@
     "group": "Release",
     "hrefZh": "releases/v0.7.0.zh.html",
     "hrefEn": "releases/v0.7.0.en.html",
-    "summaryZh": "Added the first API Debugger plugin, a lightweight Postman-like HTTP/API workspace inside DevNexus.",
+    "summaryZh": "新增首版 API Debugger 插件，在 DevNexus 内提供轻量 Postman-like HTTP/API 工作区。",
     "summaryEn": "Added the first API Debugger plugin, a lightweight Postman-like HTTP/API workspace inside DevNexus."
   },
   {
@@ -76,11 +76,11 @@
     "title": "v0.6.0",
     "version": "v0.6.0",
     "displayTitle": "DevNexus v0.6.0 Release Notes",
-    "date": "2026-05-13",
+    "date": "2026-05-29",
     "group": "Release",
     "hrefZh": "releases/v0.6.0.zh.html",
     "hrefEn": "releases/v0.6.0.en.html",
-    "summaryZh": "Added the Network diagnostics plugin for one-shot connectivity troubleshooting.",
+    "summaryZh": "新增 Network 诊断插件，用于一次性连接排障。",
     "summaryEn": "Added the Network diagnostics plugin for one-shot connectivity troubleshooting."
   },
   {
@@ -92,7 +92,7 @@
     "group": "Release",
     "hrefZh": "releases/v0.5.0.zh.html",
     "hrefEn": "releases/v0.5.0.en.html",
-    "summaryZh": "Added MySQL client plugin.",
+    "summaryZh": "新增 MySQL 客户端插件。",
     "summaryEn": "Added MySQL client plugin."
   },
   {
@@ -104,7 +104,7 @@
     "group": "Release",
     "hrefZh": "releases/v0.4.0.zh.html",
     "hrefEn": "releases/v0.4.0.en.html",
-    "summaryZh": "Added MongoDB client plugin.",
+    "summaryZh": "新增 MongoDB 客户端插件。",
     "summaryEn": "Added MongoDB client plugin."
   },
   {
@@ -112,12 +112,12 @@
     "title": "v0.3.0",
     "version": "v0.3.0",
     "displayTitle": "DevNexus v0.3.0",
-    "date": "2026-05-07",
+    "date": "2026-05-29",
     "group": "Release",
     "hrefZh": "releases/v0.3.0.zh.html",
     "hrefEn": "releases/v0.3.0.en.html",
-    "summaryZh": "S3 Client 从基础浏览升级为可用的对象管理工具",
-    "summaryEn": "S3 Client 从基础浏览升级为可用的对象管理工具"
+    "summaryZh": "S3 Client 从基础浏览升级为可用的对象管理工具。",
+    "summaryEn": "Upgraded S3 Client from basic browsing to a practical object-management tool."
   },
   {
     "id": "release-v0.2.0",
@@ -128,8 +128,8 @@
     "group": "Release",
     "hrefZh": "releases/v0.2.0.zh.html",
     "hrefEn": "releases/v0.2.0.en.html",
-    "summaryZh": "Redis Key Browser 交互升级：Key Tree / Key Detail 支持可拖拽分栏",
-    "summaryEn": "Redis Key Browser 交互升级：Key Tree / Key Detail 支持可拖拽分栏"
+    "summaryZh": "Redis Key Browser 交互升级：Key Tree 和 Key Detail 支持可拖拽分栏。",
+    "summaryEn": "Improved the Redis Key Browser interaction: Key Tree and Key Detail now support a draggable split boundary."
   },
   {
     "id": "release-v0.1.0",
@@ -140,7 +140,7 @@
     "group": "Release",
     "hrefZh": "releases/v0.1.0.zh.html",
     "hrefEn": "releases/v0.1.0.en.html",
-    "summaryZh": "全新品牌升级为 DevNexus",
-    "summaryEn": "全新品牌升级为 DevNexus"
+    "summaryZh": "全新品牌升级为 DevNexus。",
+    "summaryEn": "Rebranded the project to DevNexus."
   }
 ]
