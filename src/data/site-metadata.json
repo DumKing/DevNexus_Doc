@@ -1,24 +1,24 @@
 {
-  "latestVersion": "v0.10.0",
-  "latestReleaseTitle": "DevNexus v0.10.0",
-  "latestReleaseDate": "2026-05-29",
+  "latestVersion": "v0.10.1",
+  "latestReleaseTitle": "DevNexus v0.10.1",
+  "latestReleaseDate": "2026-06-03",
   "latestRelease": {
-    "version": "v0.10.0",
-    "titleZh": "v0.10.0 发布重点",
-    "titleEn": "v0.10.0 highlights",
-    "bodyZh": "新增 Confluence Publisher 插件：在内置 Monaco 编辑器中编辑本地 Markdown 文件，实时渲染类 Confluence 预览，并一键发布/更新到 Confluence Server / Data Center 页面。",
-    "bodyEn": "New Confluence Publisher plugin: edit local Markdown files in a built-in Monaco editor, render a live Confluence-style preview, and publish/update pages on Confluence Server / Data Center with one click.",
+    "version": "v0.10.1",
+    "titleZh": "v0.10.1 发布重点",
+    "titleEn": "v0.10.1 highlights",
+    "bodyZh": "设置页重构为多 Tab：基础设置 和 插件管理 分离，语言、开机自启、更新检查、桌面通知、开发者日志不再与插件开关混在一起。",
+    "bodyEn": "Settings now use multiple tabs: Basic and Plugins are separated, so language, startup launch, update checks, desktop notifications, and developer logs no longer compete with plugin toggles.",
     "bulletsZh": [
-      "新增 Confluence Publisher 插件：在内置 Monaco 编辑器中编辑本地 Markdown 文件，实时渲染类 Confluence 预览，并一键发布/更新到 Confluence Server / Data Center 页面。",
-      "连接管理支持站点 URL、用户名、密码/Token；凭据与其他 DevNexus 插件保持一致，使用 AES-256-GCM 加密后存储在本地 SQLite。",
-      "Markdown → Confluence Storage Format 转换基于 unified、remark-parse、remark-gfm，覆盖标题、粗体/斜体、行内代码、围栏代码块、链接、图片、表格、任务列表、引用块、有序/无序列表和分割线。"
+      "设置页重构为多 Tab：基础设置 和 插件管理 分离，语言、开机自启、更新检查、桌面通知、开发者日志不再与插件开关混在一起。",
+      "插件管理优化：隐藏插件内部版本展示，保留 manifest 版本字段用于后续单插件升级；新增搜索、分类筛选和启用数量统计，避免插件数量增加后列表过长。",
+      "新增开机自启开关：接入 Tauri autostart 插件，可在设置中控制 DevNexus 是否随系统登录启动。"
     ],
     "bulletsEn": [
-      "New Confluence Publisher plugin: edit local Markdown files in a built-in Monaco editor, render a live Confluence-style preview, and publish/update pages on Confluence Server / Data Center with one click.",
-      "Connection management with site URL, username, and password/token; credentials are encrypted with AES-256-GCM in local SQLite, consistent with other DevNexus plugins.",
-      "Markdown → Confluence Storage Format conversion via unified + remark-parse + remark-gfm, covering headings, bold/italic, inline code, fenced code blocks, links, images, tables, task lists, blockquotes, ordered/unordered lists, and horizontal rules."
+      "Settings now use multiple tabs: Basic and Plugins are separated, so language, startup launch, update checks, desktop notifications, and developer logs no longer compete with plugin toggles.",
+      "Plugin management is more scalable: plugin versions are hidden from the settings UI while remaining in manifests for future per-plugin upgrades; search, category filters, and enabled counts make the list easier to manage as more plugins are added.",
+      "Added startup launch control via the Tauri autostart plugin."
     ],
-    "code": "docs/releases/en/v0.10.0.md\ndocs/releases/cn/v0.10.0.md",
+    "code": "docs/releases/en/v0.10.1.md\ndocs/releases/cn/v0.10.1.md",
     "href": "./content/docs.html?section=guide&doc=releases"
   }
 }
