@@ -27,12 +27,27 @@ function escapeHtml(value) {
 function slugify(value) {
   return String(value || '').toLowerCase().replace(/[`*_()[\]{}]/g, '').replace(/[^\p{Letter}\p{Number}]+/gu, '-').replace(/^-+|-+$/g, '') || 'section';
 }
-function inlineMarkdown(text) {
+function normalizeMarkdownHref(href, context = {}) {
+  const value = String(href || '').trim();
+  if (!value) return value;
+  if (/^https:\/\/dumking\.github\.io\/DevNexus_Doc\/?$/i.test(value)) return '../index.html#hero';
+  if (context.kind === 'readme') {
+    if (value === 'README.md') return 'readme.zh.html';
+    if (value === 'README_EN.md') return 'readme.en.html';
+  }
+  return value;
+}
+function inlineMarkdown(text, context = {}) {
   let output = escapeHtml(text);
   output = output.replace(/`([^`]+)`/g, '<code>$1</code>');
   output = output.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
-  output = output.replace(/\[([^\]]+)\]\(([^)]+)\)/g, (_, label, href) => `<a href="${escapeHtml(href)}">${label}</a>`);
+  output = output.replace(/\[([^\]]+)\]\(([^)]+)\)/g, (_, label, href) => `<a href="${escapeHtml(normalizeMarkdownHref(href, context))}">${label}</a>`);
   return output;
+}
+function stripLanguageSwitcher(markdown) {
+  return String(markdown || '')
+    .replace(/\n\[(?:中文|Website|官网)[^\]]*\]\([^)]+\)\s*\|\s*\[(?:English|GitHub Releases|中文)[^\]]*\]\([^)]+\)(?:\s*\|\s*\[(?:English|中文)[^\]]*\]\([^)]+\))?\s*\n/g, '\n')
+    .replace(/\n\[(?:中文|English)\]\([^)]+\)\s*\|\s*\[(?:中文|English)\]\([^)]+\)\s*\n/g, '\n');
 }
 function renderCodeBlock(language, lines) {
   const lang = (language || '').toLowerCase();
@@ -40,7 +55,7 @@ function renderCodeBlock(language, lines) {
   if (lang === 'mermaid') return `<div class="mermaid">${code}</div>`;
   return `<pre><code data-lang="${escapeHtml(language)}">${code}</code></pre>`;
 }
-function markdownToHtml(markdown) {
+function markdownToHtml(markdown, context = {}) {
   const lines = String(markdown || '').replace(/\r\n/g, '\n').split('\n');
   const html = [];
   let paragraph = [];
@@ -49,7 +64,7 @@ function markdownToHtml(markdown) {
   let inCode = false;
   let codeLines = [];
   let codeLang = '';
-  const closeParagraph = () => { if (paragraph.length) { html.push(`<p>${inlineMarkdown(paragraph.join(' '))}</p>`); paragraph = []; } };
+  const closeParagraph = () => { if (paragraph.length) { html.push(`<p>${inlineMarkdown(paragraph.join(' '), context)}</p>`); paragraph = []; } };
   const closeList = () => { if (listOpen) { html.push('</ul>'); listOpen = false; } };
   const closeTable = () => {
     if (!table.length) return;
@@ -57,7 +72,7 @@ function markdownToHtml(markdown) {
     if (rows.length) {
       html.push('<div class="doc-table-wrap"><table>');
       rows.forEach((row, index) => {
-        const cells = row.replace(/^\||\|$/g, '').split('|').map((cell) => inlineMarkdown(cell.trim()));
+        const cells = row.replace(/^\||\|$/g, '').split('|').map((cell) => inlineMarkdown(cell.trim(), context));
         html.push(`<tr>${cells.map((cell) => index === 0 ? `<th>${cell}</th>` : `<td>${cell}</td>`).join('')}</tr>`);
       });
       html.push('</table></div>');
@@ -78,13 +93,13 @@ function markdownToHtml(markdown) {
       closeParagraph(); closeList(); closeTable();
       const level = heading[1].length;
       const text = heading[2].trim();
-      html.push(`<h${level} id="${slugify(text)}">${inlineMarkdown(text)}</h${level}>`);
+      html.push(`<h${level} id="${slugify(text)}">${inlineMarkdown(text, context)}</h${level}>`);
       continue;
     }
     if (/^\s*[-*+]\s+/.test(line)) {
       closeParagraph(); closeTable();
       if (!listOpen) { html.push('<ul>'); listOpen = true; }
-      html.push(`<li>${inlineMarkdown(line.replace(/^\s*[-*+]\s+/, ''))}</li>`);
+      html.push(`<li>${inlineMarkdown(line.replace(/^\s*[-*+]\s+/, ''), context)}</li>`);
       continue;
     }
     if (line.includes('|') && /^\s*\|?.+\|.+/.test(line)) { closeParagraph(); closeList(); table.push(line); continue; }
@@ -128,12 +143,12 @@ function pageTemplate({ target, title, subtitle, body, directoryLabel, lang = 'z
 </body>
 </html>`;
 }
-function writeMarkdownString(markdown, target, title, subtitle, directoryLabel, lang = 'zh') {
+function writeMarkdownString(markdown, target, title, subtitle, directoryLabel, lang = 'zh', context = {}) {
   ensureDir(path.dirname(target));
-  fs.writeFileSync(target, pageTemplate({ target, title, subtitle, body: markdownToHtml(markdown), directoryLabel, lang }), 'utf8');
+  fs.writeFileSync(target, pageTemplate({ target, title, subtitle, body: markdownToHtml(markdown, { ...context, lang }), directoryLabel, lang }), 'utf8');
 }
-function writeMarkdownPage(source, target, title, subtitle, directoryLabel, lang = 'zh') {
-  writeMarkdownString(fs.readFileSync(source, 'utf8'), target, title, subtitle, directoryLabel, lang);
+function writeMarkdownPage(source, target, title, subtitle, directoryLabel, lang = 'zh', context = {}) {
+  writeMarkdownString(fs.readFileSync(source, 'utf8'), target, title, subtitle, directoryLabel, lang, context);
 }
 function collectMarkdownFiles(dir) {
   if (!fs.existsSync(dir)) return [];
@@ -190,8 +205,8 @@ function buildSiteDataAsset() {
 }
 function buildReadmePages() {
   const readme = splitReadme();
-  writeMarkdownString(readme.zh, path.join(outDir, 'readme.zh.html'), '快速开始', 'DevNexus README 中文版。', '快速开始', 'zh');
-  writeMarkdownString(readme.en, path.join(outDir, 'readme.en.html'), 'Quick Start', 'DevNexus README in English.', 'Quick Start', 'en');
+  writeMarkdownString(readme.zh, path.join(outDir, 'readme.zh.html'), '快速开始', 'DevNexus README 中文版。', '快速开始', 'zh', { kind: 'readme' });
+  writeMarkdownString(readme.en, path.join(outDir, 'readme.en.html'), 'Quick Start', 'DevNexus README in English.', 'Quick Start', 'en', { kind: 'readme' });
 }
 function buildReleaseIndex() {
   const releasesDir = path.join(sourceRoot, 'docs', 'releases');
@@ -213,8 +228,8 @@ function buildReleaseIndex() {
     const titleEn = `Release ${version}`;
     const hrefZh = `releases/${version}.zh.html`;
     const hrefEn = `releases/${version}.en.html`;
-    writeMarkdownString(markdownZh, path.join(outDir, hrefZh), titleZh, `${version} 发布说明`, 'Release', 'zh');
-    writeMarkdownString(markdownEn, path.join(outDir, hrefEn), titleEn, `${version} release notes`, 'Release', 'en');
+    writeMarkdownString(stripLanguageSwitcher(markdownZh), path.join(outDir, hrefZh), titleZh, `${version} 发布说明`, 'Release', 'zh', { kind: 'release' });
+    writeMarkdownString(stripLanguageSwitcher(markdownEn), path.join(outDir, hrefEn), titleEn, `${version} release notes`, 'Release', 'en', { kind: 'release' });
     return {
       id: `release-${version}`,
       title: version,
